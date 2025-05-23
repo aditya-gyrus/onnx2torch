@@ -41,7 +41,7 @@ def make_model_from_nodes(  # pylint: disable=missing-function-docstring
     inputs_example: Optional[Dict[str, np.ndarray]] = None,
     inputs_info: Optional[Sequence[ValueInfoProto]] = None,
     outputs_info: Optional[Sequence[ValueInfoProto]] = None,
-    opset_version: Optional[int] = 11,
+    opset_version: Optional[int] = 14,  #11
 ) -> ModelProto:
     if inputs_info is None and inputs_example is None:
         raise ValueError('inputs_example or inputs_info must be set')
@@ -171,7 +171,7 @@ def calc_torch_and_ort_outputs(  # pylint: disable=missing-function-docstring
 def convert_onnx2torch2onnx(  # pylint: disable=missing-function-docstring
     model: ModelProto,
     inputs: Dict[str, np.ndarray],
-    opset_version: int = 13,
+    opset_version: int = 14, #13
     ignore_export_checker: bool = False,
     **export_kwargs,
 ) -> ModelProto:
@@ -204,7 +204,7 @@ def _check_onnx_model(
     torch_cpu_cuda_check_function: Optional[Callable] = None,
     onnx_torch2onnx_check_function: Optional[Callable] = None,
     ignore_export_checker: bool = False,
-    opset_version: int = 13,
+    opset_version: int = 14,  #13
 ) -> None:
     ort_outputs = calc_ort_outputs(onnx_model, onnx_inputs)
     torch_outputs = calc_torch_outputs(onnx_model, onnx_inputs, device='cpu')
@@ -233,7 +233,7 @@ def check_onnx_model(  # pylint: disable=missing-function-docstring
     atol_torch_cpu_cuda: float = 0.0,
     atol_onnx_torch2onnx: float = 0.0,
     ignore_export_checker: bool = False,
-    opset_version: int = 13,
+    opset_version: int = 14,  #13
 ) -> None:
     def onnx_torch_check_function(onnx_output, torch_output):  # pylint: disable=missing-function-docstring
         if len(onnx_output) == 1:
@@ -282,7 +282,7 @@ def check_torch_model(  # pylint: disable=missing-function-docstring,unused-argu
     atol_onnx_torch: float = 0.0,
     atol_torch_cpu_cuda: float = 0.0,
     atol_onnx_torch2onnx: float = 0.0,
-    opset_version: int = 13,
+    opset_version: int = 14, #13
 ) -> None:
     arguments = locals()
     input_names = list(onnx_inputs.keys())
